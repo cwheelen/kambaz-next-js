@@ -1,4 +1,18 @@
 import "./index.css";
+import ForegroundColors from "./ForegroundColors";
+import BackgroundColor from "./BackgroundColors";
+import Borders from "./Borders";
+import Padding from "./Padding";
+import Margins from "./Margins";
+import Corners from "./Corners";
+import Dimensions from "./Dimensions";
+import Positions from "./Positions";
+import Zindex from "./Zindex";
+import Float from "./Float";
+import Flex from "./Flex";
+import GridLayout from "./GridLayout";
+import MediaQueriesDemo from "./MediaQueriesDemo";
+
 export default function Lab2() {
   return (
     <div id="wd-lab2">
@@ -48,5 +62,19 @@ Here&apos;s another paragraph using a different ID and a different look and feel
         </div>
       </div>
 
+    <ForegroundColors />
+    <BackgroundColor />
+    <Borders />
+    <Padding />
+    <Margins />
+    <Corners />
+    <Dimensions />
+    <Positions />
+    <Zindex />
+    <Float />
+    <GridLayout />
+    <Flex />
+    <MediaQueriesDemo />
 
-    </div>);}
+    </div>
+  );}
