@@ -13,10 +13,19 @@ import Flex from "./Flex";
 import GridLayout from "./GridLayout";
 import MediaQueriesDemo from "./MediaQueriesDemo";
 import ReactIconsSampler from "./ReactIconsSampler";
+import { Container } from "react-bootstrap";
+import BootsrapGrids from "./BootstrapGrids";
+import ScreenSizeLabel from "./ScreenSizeLabel";
+import BootstrapTables from "./BootstrapTables";
+import BootstrapLists from "./BootstrapLists";
+import BootstrapForms from "./BootstrapForms";
+import BootstrapNavigation from "./BootstrapNavigation";
+import TOC from "./TOC";
 
 export default function Lab2() {
   return (
-    <div id="wd-lab2">
+    
+    <Container>
       <h2>Lab 2 - Cascading Style Sheets</h2>
       <h3>Styling with the STYLE attribute</h3>
       <p>
@@ -77,6 +86,13 @@ Here&apos;s another paragraph using a different ID and a different look and feel
     <Flex />
     <MediaQueriesDemo />
     <ReactIconsSampler />
+    <BootsrapGrids />
+    <ScreenSizeLabel />
+    <BootstrapTables />
+    <BootstrapLists />
+    <BootstrapForms />
+    <BootstrapNavigation />
+    <TOC />
 
-    </div>
+    </Container>
   );}
