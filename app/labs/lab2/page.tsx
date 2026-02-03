@@ -12,6 +12,7 @@ import Float from "./Float";
 import Flex from "./Flex";
 import GridLayout from "./GridLayout";
 import MediaQueriesDemo from "./MediaQueriesDemo";
+import ReactIconsSampler from "./ReactIconsSampler";
 
 export default function Lab2() {
   return (
@@ -75,6 +76,7 @@ Here&apos;s another paragraph using a different ID and a different look and feel
     <GridLayout />
     <Flex />
     <MediaQueriesDemo />
+    <ReactIconsSampler />
 
     </div>
   );}
