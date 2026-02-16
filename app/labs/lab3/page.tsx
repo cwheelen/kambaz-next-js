@@ -26,8 +26,14 @@ import DestructingImports from "./DestructingImports";
 import Classes from "./Classes";
 import Styles from "./Styles";
 import ServerComponentDemo from "./ClientComponentDemo";
+import Square from "./Square";
+import Highlight from "./Highlight";
+import PathParameters from "./PathParameters";
+import AddPathParameters from "./add/[a]/[b]/page";
+import TodoList from "./todos/TodoList";
 
 export default function Lab3() {
+  console.log('Hello World!');
   return(
     <div id="wd-lab3">
       <h3>Lab 3</h3>
@@ -59,6 +65,18 @@ export default function Lab3() {
       <Classes />
       <Styles />
       <ServerComponentDemo />      
+
+      <h4>Square of 4</h4>
+      <Square>4</Square>
+      <hr />
+
+      <Highlight>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipitratione eaque illo minus cum, saepe totam
+        vel nihil repellat nemo explicabo excepturi consectetur. Modi omnis minus sequi maiores, provident voluptates.
+      </Highlight>
+
+      <AddPathParameters />
+      <PathParameters />
+      <TodoList />
     </div>
   );
 }
