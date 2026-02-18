@@ -1,24 +1,45 @@
+"use client";
+
+import { useParams } from "next/navigation";
+import * as db from "../../../../database";
 import { Form, Button } from "react-bootstrap";
+import Link from "next/link";
+
+type Assignment = {
+  _id: string;
+  title: string;
+  course: string;
+  description?: string;
+  points?: number;
+  dueDate?: string;
+  availableFrom?: string;
+  availableUntil?: string;
+};
 
 export default function AssignmentEditor() {
+  const { cid, aid } = useParams();
+  const assignment = (db.assignments as Assignment[]).find(
+    (a) => a._id === aid
+  );
+
   return (
     <div id="wd-assignments-editor" className="p-3">
       <Form>
         <div className="mb-3">
           <Form.Label htmlFor="wd-name">Assignment Name</Form.Label>
-          <Form.Control 
-            id="wd-name" 
-            defaultValue="A1 - ENV + HTML" 
+          <Form.Control
+            id="wd-name"
+            defaultValue={assignment?.title ?? ""}
           />
         </div>
 
         <div className="mb-3">
           <Form.Label htmlFor="wd-description">Description</Form.Label>
-          <Form.Control 
+          <Form.Control
             as="textarea"
-            id="wd-description" 
+            id="wd-description"
             rows={10}
-            defaultValue="The assignment is available online Submit a link to the landing page of"
+            defaultValue={assignment?.description ?? ""}
           />
         </div>
 
@@ -27,10 +48,10 @@ export default function AssignmentEditor() {
             Points
           </Form.Label>
           <div className="col-sm-9">
-            <Form.Control 
-              id="wd-points" 
+            <Form.Control
+              id="wd-points"
               type="number"
-              defaultValue={100} 
+              defaultValue={assignment?.points ?? 100}
             />
           </div>
         </div>
@@ -75,31 +96,11 @@ export default function AssignmentEditor() {
               </Form.Select>
 
               <Form.Label className="fw-bold">Online Entry Options</Form.Label>
-              <Form.Check 
-                type="checkbox" 
-                id="wd-text-entry"
-                label="Text Entry" 
-              />
-              <Form.Check 
-                type="checkbox" 
-                id="wd-website-url"
-                label="Website URL" 
-              />
-              <Form.Check 
-                type="checkbox" 
-                id="wd-media-recordings"
-                label="Media Recordings" 
-              />
-              <Form.Check 
-                type="checkbox" 
-                id="wd-student-annotation"
-                label="Student Annotation" 
-              />
-              <Form.Check 
-                type="checkbox" 
-                id="wd-file-upload"
-                label="File Uploads" 
-              />
+              <Form.Check type="checkbox" id="wd-text-entry"        label="Text Entry" />
+              <Form.Check type="checkbox" id="wd-website-url"       label="Website URL" />
+              <Form.Check type="checkbox" id="wd-media-recordings"  label="Media Recordings" />
+              <Form.Check type="checkbox" id="wd-student-annotation" label="Student Annotation" />
+              <Form.Check type="checkbox" id="wd-file-upload"       label="File Uploads" />
             </div>
           </div>
         </div>
@@ -110,19 +111,15 @@ export default function AssignmentEditor() {
             <div className="border rounded p-3">
               <div className="mb-3">
                 <Form.Label htmlFor="wd-assign-to" className="fw-bold">Assign to</Form.Label>
-                <Form.Control 
-                  id="wd-assign-to" 
-                  type="text"
-                  defaultValue="Everyone"
-                />
+                <Form.Control id="wd-assign-to" type="text" defaultValue="Everyone" />
               </div>
 
               <div className="mb-3">
                 <Form.Label htmlFor="wd-due-date" className="fw-bold">Due</Form.Label>
-                <Form.Control 
-                  id="wd-due-date" 
+                <Form.Control
+                  id="wd-due-date"
                   type="date"
-                  defaultValue="2024-05-13"
+                  defaultValue={assignment?.dueDate ?? ""}
                 />
               </div>
 
@@ -132,10 +129,10 @@ export default function AssignmentEditor() {
                     <Form.Label htmlFor="wd-available-from" className="fw-bold">
                       Available from
                     </Form.Label>
-                    <Form.Control 
-                      id="wd-available-from" 
+                    <Form.Control
+                      id="wd-available-from"
                       type="date"
-                      defaultValue="2024-05-06"
+                      defaultValue={assignment?.availableFrom ?? ""}
                     />
                   </div>
                 </div>
@@ -144,10 +141,10 @@ export default function AssignmentEditor() {
                     <Form.Label htmlFor="wd-available-until" className="fw-bold">
                       Until
                     </Form.Label>
-                    <Form.Control 
-                      id="wd-available-until" 
+                    <Form.Control
+                      id="wd-available-until"
                       type="date"
-                      defaultValue="2024-05-20"
+                      defaultValue={assignment?.availableUntil ?? ""}
                     />
                   </div>
                 </div>
@@ -159,8 +156,12 @@ export default function AssignmentEditor() {
         <hr />
 
         <div className="d-flex justify-content-end gap-2">
-          <Button variant="secondary">Cancel</Button>
-          <Button variant="danger">Save</Button>
+          <Link href={`/courses/${cid}/assignments`}>
+            <Button variant="secondary">Cancel</Button>
+          </Link>
+          <Link href={`/courses/${cid}/assignments`}>
+            <Button variant="danger">Save</Button>
+          </Link>
         </div>
       </Form>
     </div>
