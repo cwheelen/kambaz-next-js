@@ -1,69 +1,88 @@
 "use client";
-
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useParams } from "next/navigation";
-import * as db from "../../../database";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../store";
+import { deleteAssignment } from "./reducer";
 import Link from "next/link";
-import { ListGroup } from "react-bootstrap";
 import { BsGripVertical } from "react-icons/bs";
-import { FaPlus } from "react-icons/fa6";
-import AssignmentsControls from "./assignmentControl";
-import AssignmentControlButtons from "./assignmentControlButtons";
-
-type Assignment = { _id: string; title: string; course: string };
+import { FaTrash } from "react-icons/fa";
+import { IoEllipsisVertical } from "react-icons/io5";
+import { BsPlus } from "react-icons/bs";
+import GreenCheckmark from "../modules/GreenCheckmark";
+import { ListGroup, ListGroupItem, Button } from "react-bootstrap";
 
 export default function Assignments() {
   const { cid } = useParams();
-  const courseAssignments = (db.assignments as Assignment[])
-    .filter((assignment) => assignment.course === cid);
+  const dispatch = useDispatch();
+  const { assignments } = useSelector((state: RootState) => state.assignmentReducer);
+
+  const handleDelete = (assignmentId: string) => {
+    if (window.confirm("Are you sure you want to remove this assignment?")) {
+      dispatch(deleteAssignment(assignmentId));
+    }
+  };
 
   return (
     <div id="wd-assignments">
-      <AssignmentsControls />
-      <br /><br /><br /><br />
+      <div className="d-flex justify-content-between align-items-center mb-3">
+        <input type="search" placeholder="Search for Assignment"
+               className="form-control w-50" id="wd-search-assignment" />
+        <div>
+          <Button variant="secondary" className="me-2" id="wd-add-assignment-group">
+            <BsPlus /> Group
+          </Button>
+          <Link href={`/courses/${cid}/assignments/new`}>
+            <Button variant="danger" id="wd-add-assignment-btn">
+              <BsPlus /> Assignment
+            </Button>
+          </Link>
+          <IoEllipsisVertical className="fs-4 ms-2" />
+        </div>
+      </div>
 
-      <ListGroup className="rounded-0" id="wd-assignment-list">
-        <ListGroup.Item className="p-0 mb-5 fs-5 border-gray">
+      <ListGroup id="wd-assignment-list" className="rounded-0">
+        <ListGroupItem className="wd-assignment-list-item p-0 mb-5 fs-5 border-gray">
           <div className="wd-title p-3 ps-2 bg-secondary d-flex justify-content-between align-items-center">
             <div>
               <BsGripVertical className="me-2 fs-3" />
-              ASSIGNMENTS
+              <b>ASSIGNMENTS</b>
             </div>
             <div>
-              <span className="badge rounded-pill bg-light text-dark border me-2">
-                40% of Total
-              </span>
-              <FaPlus className="me-2" />
-              <span className="fs-4">⋮</span>
+              <span className="border rounded-pill px-2 me-2">40% of Total</span>
+              <BsPlus className="fs-4" />
+              <IoEllipsisVertical className="fs-4" />
             </div>
           </div>
 
-          <ListGroup className="rounded-0">
-            {courseAssignments.map((assignment) => (
-              <ListGroup.Item
-                key={assignment._id}
-                className="wd-assignment-list-item p-3 ps-1 border-start border-success border-3"
-              >
-                <BsGripVertical className="me-2 fs-3" />
-                <div className="d-inline-block" style={{ width: "calc(100% - 100px)" }}>
-                  <Link
-                    href={`/courses/${cid}/assignments/${assignment._id}`}
-                    className="wd-assignment-link text-dark fw-bold text-decoration-none"
-                  >
-                    {assignment.title}
-                  </Link>
-                  <div className="text-muted small">
-                    <span className="text-danger">Multiple Modules</span> |{" "}
-                    <strong>Not available until</strong> May 6 at 12:00am
+          <ListGroup className="wd-assignment-items rounded-0">
+            {assignments
+              .filter((a: any) => a.course === cid)
+              .map((assignment: any) => (
+                <ListGroupItem key={assignment._id}
+                               className="wd-assignment-list-item p-3 ps-1 d-flex justify-content-between align-items-center">
+                  <div className="d-flex align-items-center">
+                    <BsGripVertical className="me-2 fs-3" />
+                    <div>
+                      <Link href={`/courses/${cid}/assignments/${assignment._id}`}
+                            className="text-decoration-none text-dark">
+                        <b>{assignment.title}</b>
+                      </Link>
+                      <div className="text-muted fs-6">
+                        Multiple Modules | Due {assignment.dueDate} | {assignment.points} pts
+                      </div>
+                    </div>
                   </div>
-                  <div className="text-muted small">
-                    <strong>Due</strong> May 13 at 11:59pm | 100 pts
+                  <div className="d-flex align-items-center">
+                    <GreenCheckmark />
+                    <FaTrash className="text-danger me-2"
+                             onClick={() => handleDelete(assignment._id)} />
+                    <IoEllipsisVertical className="fs-4" />
                   </div>
-                </div>
-                <AssignmentControlButtons />
-              </ListGroup.Item>
-            ))}
+                </ListGroupItem>
+              ))}
           </ListGroup>
-        </ListGroup.Item>
+        </ListGroupItem>
       </ListGroup>
     </div>
   );
