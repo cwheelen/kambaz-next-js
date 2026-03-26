@@ -1,5 +1,5 @@
 "use client";
-/* eslint-disable react-hooks/set-state-in-effect */
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { redirect } from "next/navigation";
@@ -8,20 +8,35 @@ import { useSelector, useDispatch } from "react-redux";
 import { setCurrentUser } from "../reducer";
 import { RootState } from "../../store";
 import { Button, FormControl } from "react-bootstrap";
+import * as client from "../client";
+import router from "next/router";
+
 export default function Profile() {
  const [profile, setProfile] = useState<any>({});
  const dispatch = useDispatch();
  const { currentUser } = useSelector((state: RootState) => state.accountReducer);
+ // eslint-disable-next-line @typescript-eslint/no-unused-vars
+ const updateProfile = async () => {
+  const updatedProfile = await client.updateUser(profile);
+  dispatch(setCurrentUser(updatedProfile));
+};
+
+const signout = async () => {
+  await client.signout();
+  dispatch(setCurrentUser(null));
+  router.push("/account/signin");
+};
  const fetchProfile = () => {
    if (!currentUser) return redirect("/account/signin");
    setProfile(currentUser);
  };
- const signout = () => {
-   dispatch(setCurrentUser(null));
-   redirect("/account/signin");
- };
+//  const signout = () => {
+//    dispatch(setCurrentUser(null));
+//    redirect("/account/signin");
+//  };
  useEffect(() => {
    fetchProfile();
+ // eslint-disable-next-line react-hooks/exhaustive-deps
  }, []);
  return (
    <div className="wd-profile-screen">
