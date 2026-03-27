@@ -8,7 +8,7 @@ import GreenCheckmark from "./GreenCheckmark";
 export default function ModuleControlButtons({
   moduleId,
   deleteModule,
-  editModule
+  editModule,
 }: {
   moduleId: string;
   deleteModule: (moduleId: string) => void;
@@ -16,8 +16,14 @@ export default function ModuleControlButtons({
 }) {
   return (
     <div className="float-end">
-      <FaPencil onClick={() => editModule(moduleId)} className="text-primary me-3" />
-      <FaTrash className="text-danger me-2 mb-1" onClick={() => deleteModule(moduleId)} />
+      <FaPencil
+        onClick={() => editModule(moduleId)}
+        className="text-primary me-3"
+      />
+      <FaTrash
+        className="text-danger me-2 mb-1"
+        onClick={() => deleteModule(moduleId)}
+      />
       <GreenCheckmark />
       <BsPlus className="fs-1" />
       <IoEllipsisVertical className="fs-4" />

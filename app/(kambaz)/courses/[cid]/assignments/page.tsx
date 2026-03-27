@@ -1,24 +1,35 @@
 "use client";
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { useEffect } from "react";
 import { useParams } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store";
-import { deleteAssignment } from "./reducer";
+import { setAssignments, deleteAssignment } from "./reducer";
+import * as client from "../../client";
 import Link from "next/link";
-import { BsGripVertical } from "react-icons/bs";
+import { BsGripVertical, BsPlus } from "react-icons/bs";
 import { FaTrash } from "react-icons/fa";
 import { IoEllipsisVertical } from "react-icons/io5";
-import { BsPlus } from "react-icons/bs";
 import GreenCheckmark from "../modules/GreenCheckmark";
 import { ListGroup, ListGroupItem, Button } from "react-bootstrap";
 
 export default function Assignments() {
   const { cid } = useParams();
   const dispatch = useDispatch();
-  const { assignments } = useSelector((state: RootState) => state.assignmentReducer);
+  const { assignments } = useSelector(
+    (state: RootState) => state.assignmentReducer,
+  );
 
-  const handleDelete = (assignmentId: string) => {
+  useEffect(() => {
+    client.findAssignmentsForCourse(cid as string).then((data) => {
+      dispatch(setAssignments(data));
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cid]);
+
+  const handleDelete = async (assignmentId: string) => {
     if (window.confirm("Are you sure you want to remove this assignment?")) {
+      await client.deleteAssignment(assignmentId);
       dispatch(deleteAssignment(assignmentId));
     }
   };
@@ -26,10 +37,18 @@ export default function Assignments() {
   return (
     <div id="wd-assignments">
       <div className="d-flex justify-content-between align-items-center mb-3">
-        <input type="search" placeholder="Search for Assignment"
-               className="form-control w-50" id="wd-search-assignment" />
+        <input
+          type="search"
+          placeholder="Search for Assignment"
+          className="form-control w-50"
+          id="wd-search-assignment"
+        />
         <div>
-          <Button variant="secondary" className="me-2" id="wd-add-assignment-group">
+          <Button
+            variant="secondary"
+            className="me-2"
+            id="wd-add-assignment-group"
+          >
             <BsPlus /> Group
           </Button>
           <Link href={`/courses/${cid}/assignments/new`}>
@@ -49,38 +68,45 @@ export default function Assignments() {
               <b>ASSIGNMENTS</b>
             </div>
             <div>
-              <span className="border rounded-pill px-2 me-2">40% of Total</span>
+              <span className="border rounded-pill px-2 me-2">
+                40% of Total
+              </span>
               <BsPlus className="fs-4" />
               <IoEllipsisVertical className="fs-4" />
             </div>
           </div>
 
           <ListGroup className="wd-assignment-items rounded-0">
-            {assignments
-              .filter((a: any) => a.course === cid)
-              .map((assignment: any) => (
-                <ListGroupItem key={assignment._id}
-                               className="wd-assignment-list-item p-3 ps-1 d-flex justify-content-between align-items-center">
-                  <div className="d-flex align-items-center">
-                    <BsGripVertical className="me-2 fs-3" />
-                    <div>
-                      <Link href={`/courses/${cid}/assignments/${assignment._id}`}
-                            className="text-decoration-none text-dark">
-                        <b>{assignment.title}</b>
-                      </Link>
-                      <div className="text-muted fs-6">
-                        Multiple Modules | Due {assignment.dueDate} | {assignment.points} pts
-                      </div>
+            {assignments.map((assignment: any) => (
+              <ListGroupItem
+                key={assignment._id}
+                className="wd-assignment-list-item p-3 ps-1 d-flex justify-content-between align-items-center"
+              >
+                <div className="d-flex align-items-center">
+                  <BsGripVertical className="me-2 fs-3" />
+                  <div>
+                    <Link
+                      href={`/courses/${cid}/assignments/${assignment._id}`}
+                      className="text-decoration-none text-dark"
+                    >
+                      <b>{assignment.title}</b>
+                    </Link>
+                    <div className="text-muted fs-6">
+                      Multiple Modules | Due {assignment.dueDate} |{" "}
+                      {assignment.points} pts
                     </div>
                   </div>
-                  <div className="d-flex align-items-center">
-                    <GreenCheckmark />
-                    <FaTrash className="text-danger me-2"
-                             onClick={() => handleDelete(assignment._id)} />
-                    <IoEllipsisVertical className="fs-4" />
-                  </div>
-                </ListGroupItem>
-              ))}
+                </div>
+                <div className="d-flex align-items-center">
+                  <GreenCheckmark />
+                  <FaTrash
+                    className="text-danger me-2"
+                    onClick={() => handleDelete(assignment._id)}
+                  />
+                  <IoEllipsisVertical className="fs-4" />
+                </div>
+              </ListGroupItem>
+            ))}
           </ListGroup>
         </ListGroupItem>
       </ListGroup>

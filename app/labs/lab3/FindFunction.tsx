@@ -10,4 +10,5 @@ export default function FindFunction() {
       four = {four} <br />
       string3 = {string3} <hr />
     </div>
-);}
+  );
+}

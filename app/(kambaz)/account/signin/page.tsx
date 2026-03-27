@@ -34,13 +34,17 @@ export default function Signin() {
       <FormControl
         className="mb-2"
         placeholder="username"
-        onChange={(e) => setCredentials({ ...credentials, username: e.target.value })}
+        onChange={(e) =>
+          setCredentials({ ...credentials, username: e.target.value })
+        }
       />
       <FormControl
         className="mb-2"
         type="password"
         placeholder="password"
-        onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
+        onChange={(e) =>
+          setCredentials({ ...credentials, password: e.target.value })
+        }
       />
       <button onClick={signin} className="btn btn-primary w-100 mb-2">
         Sign In

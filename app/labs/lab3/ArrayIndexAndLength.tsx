@@ -6,6 +6,7 @@ export default function ArrayIndexAndLength() {
     <div id="wd-array-index-and-length">
       <h4>Array index and length</h4>
       length1 = {length1} <br />
-      index1 = {index1}   <hr />
+      index1 = {index1} <hr />
     </div>
-);}
+  );
+}

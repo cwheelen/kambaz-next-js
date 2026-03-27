@@ -17,7 +17,11 @@ interface TodosContextState {
 
 const TodosContext = createContext<TodosContextState | undefined>(undefined);
 
-export const TodosProvider = ({ children }: { children: ReactNode }): React.ReactElement => {
+export const TodosProvider = ({
+  children,
+}: {
+  children: ReactNode;
+}): React.ReactElement => {
   const [todos, setTodos] = useState<Todo[]>([
     { id: "1", title: "Learn React" },
     { id: "2", title: "Learn Node" },
@@ -25,7 +29,10 @@ export const TodosProvider = ({ children }: { children: ReactNode }): React.Reac
   const [todo, setTodo] = useState<Todo>({ id: "-1", title: "Learn Mongo" });
 
   const addTodo = (todo: Todo) => {
-    const newTodos = [...todos, { ...todo, id: new Date().getTime().toString() }];
+    const newTodos = [
+      ...todos,
+      { ...todo, id: new Date().getTime().toString() },
+    ];
     setTodos(newTodos);
     setTodo({ id: "-1", title: "" });
   };
@@ -42,7 +49,7 @@ export const TodosProvider = ({ children }: { children: ReactNode }): React.Reac
   return React.createElement(
     TodosContext.Provider,
     { value: { todos, todo, setTodo, addTodo, deleteTodo, updateTodo } },
-    children
+    children,
   );
 };
 

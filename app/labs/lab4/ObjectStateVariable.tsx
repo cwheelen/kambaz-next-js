@@ -11,11 +11,13 @@ export default function ObjectStateVariable() {
         onChange={(e) => setPerson({ ...person, name: e.target.value })}
       />
       <FormControl
-        defaultValue={person.age} type="number"
-        onChange={(e) => setPerson({ ...person,
-                                     age: parseInt(e.target.value) })}
+        defaultValue={person.age}
+        type="number"
+        onChange={(e) =>
+          setPerson({ ...person, age: parseInt(e.target.value) })
+        }
       />
-      <hr/>
+      <hr />
     </div>
   );
 }

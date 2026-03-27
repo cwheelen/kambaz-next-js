@@ -4,7 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { v4 as uuidv4 } from "uuid";
 
 const initialState = {
-  courses: [] as any[],   
+  courses: [] as any[],
 };
 
 const coursesSlice = createSlice({
@@ -17,12 +17,12 @@ const coursesSlice = createSlice({
     },
     deleteCourse: (state, { payload: courseId }) => {
       state.courses = state.courses.filter(
-        (course: any) => course._id !== courseId
+        (course: any) => course._id !== courseId,
       );
     },
     updateCourse: (state, { payload: course }) => {
       state.courses = state.courses.map((c: any) =>
-        c._id === course._id ? course : c
+        c._id === course._id ? course : c,
       ) as any;
     },
     setCourses: (state, { payload: courses }) => {

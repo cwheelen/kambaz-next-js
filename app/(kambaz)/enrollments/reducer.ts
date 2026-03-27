@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createSlice } from "@reduxjs/toolkit";
-import { enrollments } from "../database";
 
 const initialState = {
-  enrollments: enrollments,
+  enrollments: [] as any[],
 };
 
 const enrollmentsSlice = createSlice({
@@ -13,12 +12,16 @@ const enrollmentsSlice = createSlice({
     enroll: (state, { payload: { userId, courseId } }) => {
       state.enrollments = [
         ...state.enrollments,
-        { _id: new Date().getTime().toString(), user: userId, course: courseId },
+        {
+          _id: new Date().getTime().toString(),
+          user: userId,
+          course: courseId,
+        },
       ] as any;
     },
     unenroll: (state, { payload: { userId, courseId } }) => {
       state.enrollments = state.enrollments.filter(
-        (e: any) => !(e.user === userId && e.course === courseId)
+        (e: any) => !(e.user === userId && e.course === courseId),
       );
     },
   },

@@ -1,34 +1,23 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import { FaUserCircle } from "react-icons/fa";
-import * as db from "../../../../database";
 import { useParams } from "next/navigation";
+import axios from "axios";
 
-type User = {
-  _id: string;
-  firstName: string;
-  lastName: string;
-  loginId: string;
-  section: string;
-  role: string;
-  lastActivity: string;
-  totalActivity: string;
-};
-
-type Enrollment = {
-  _id: string;
-  user: string;
-  course: string;
-};
-
+const HTTP_SERVER = process.env.NEXT_PUBLIC_HTTP_SERVER;
 
 export default function PeopleTable() {
   const { cid } = useParams();
-  const users: User[] = db.users as User[];
-  const enrollments: Enrollment[] = db.enrollments as Enrollment[];
-//   console.log("cid:", cid);
-//   console.log("all enrollments:", db.enrollments);
-//   console.log("right here!!");
+  const [users, setUsers] = useState<any[]>([]);
+
+  useEffect(() => {
+    axios
+      .get(`${HTTP_SERVER}/api/courses/${cid}/users`)
+      .then((res) => setUsers(res.data))
+      .catch(console.error);
+  }, [cid]);
 
   return (
     <div id="wd-people-table">
@@ -44,27 +33,20 @@ export default function PeopleTable() {
           </tr>
         </thead>
         <tbody>
-          {users
-            .filter((usr) =>
-              enrollments.some(
-                (enrollment) => enrollment.user === usr._id && enrollment.course === cid
-              )
-            )
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            .map((user: any) => (
-              <tr key={user._id}>
-                <td className="wd-full-name text-nowrap">
-                  <FaUserCircle className="me-2 fs-1 text-secondary" />
-                  <span className="wd-first-name">{user.firstName}</span>{" "}
-                  <span className="wd-last-name">{user.lastName}</span>
-                </td>
-                <td className="wd-login-id">{user.loginId}</td>
-                <td className="wd-section">{user.section}</td>
-                <td className="wd-role">{user.role}</td>
-                <td className="wd-last-activity">{user.lastActivity}</td>
-                <td className="wd-total-activity">{user.totalActivity}</td>
-              </tr>
-            ))}
+          {users.map((user: any) => (
+            <tr key={user._id}>
+              <td className="wd-full-name text-nowrap">
+                <FaUserCircle className="me-2 fs-1 text-secondary" />
+                <span className="wd-first-name">{user.firstName}</span>{" "}
+                <span className="wd-last-name">{user.lastName}</span>
+              </td>
+              <td className="wd-login-id">{user.loginId}</td>
+              <td className="wd-section">{user.section}</td>
+              <td className="wd-role">{user.role}</td>
+              <td className="wd-last-activity">{user.lastActivity}</td>
+              <td className="wd-total-activity">{user.totalActivity}</td>
+            </tr>
+          ))}
         </tbody>
       </Table>
     </div>

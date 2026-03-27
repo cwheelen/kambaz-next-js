@@ -33,11 +33,11 @@ import AddPathParameters from "./add/[a]/[b]/page";
 import TodoList from "./todos/TodoList";
 
 export default function Lab3() {
-  console.log('Hello World!');
-  return(
+  console.log("Hello World!");
+  return (
     <div id="wd-lab3">
       <h3>Lab 3</h3>
-      <VariablesAndConstants/>
+      <VariablesAndConstants />
       <VariableTypes />
       <BooleanVariable />
       <IfElse />
@@ -64,14 +64,17 @@ export default function Lab3() {
       <DestructingImports />
       <Classes />
       <Styles />
-      <ServerComponentDemo />      
+      <ServerComponentDemo />
 
       <h4>Square of 4</h4>
       <Square>4</Square>
       <hr />
 
-      <Highlight>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipitratione eaque illo minus cum, saepe totam
-        vel nihil repellat nemo explicabo excepturi consectetur. Modi omnis minus sequi maiores, provident voluptates.
+      <Highlight>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipitratione
+        eaque illo minus cum, saepe totam vel nihil repellat nemo explicabo
+        excepturi consectetur. Modi omnis minus sequi maiores, provident
+        voluptates.
       </Highlight>
 
       <AddPathParameters />

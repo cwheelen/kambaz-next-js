@@ -35,7 +35,6 @@ export const deleteTodo = async (todo: any) => {
   return response.data;
 };
 
-
 export const createNewTodo = async () => {
   const response = await axios.get(`${TODOS_API}/create`);
   return response.data;

@@ -28,14 +28,18 @@ export default function WorkingWithObjectsAsynchronously() {
       <FormControl
         defaultValue={assignment.title}
         className="mb-2"
-        onChange={(e) => setAssignment({ ...assignment, title: e.target.value })}
+        onChange={(e) =>
+          setAssignment({ ...assignment, title: e.target.value })
+        }
       />
       <FormControl
         as="textarea"
         rows={3}
         defaultValue={assignment.description}
         className="mb-2"
-        onChange={(e) => setAssignment({ ...assignment, description: e.target.value })}
+        onChange={(e) =>
+          setAssignment({ ...assignment, description: e.target.value })
+        }
       />
       <FormControl
         type="date"
@@ -49,7 +53,9 @@ export default function WorkingWithObjectsAsynchronously() {
           type="checkbox"
           id="wd-completed"
           defaultChecked={assignment.completed}
-          onChange={(e) => setAssignment({ ...assignment, completed: e.target.checked })}
+          onChange={(e) =>
+            setAssignment({ ...assignment, completed: e.target.checked })
+          }
         />
         <label className="form-check-label" htmlFor="wd-completed">
           Completed
@@ -58,7 +64,8 @@ export default function WorkingWithObjectsAsynchronously() {
 
       <button
         className="btn btn-primary me-2"
-        onClick={() => updateTitle(assignment.title)}>
+        onClick={() => updateTitle(assignment.title)}
+      >
         Update Title
       </button>
 

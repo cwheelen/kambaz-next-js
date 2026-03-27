@@ -17,6 +17,7 @@ export default function TodoList() {
           <TodoItem todo={todo} />
         ))}
       </ListGroup>
-      <hr/>
+      <hr />
     </div>
-);}
+  );
+}

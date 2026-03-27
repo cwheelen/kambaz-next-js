@@ -19,7 +19,7 @@ export default function Signup() {
       const currentUser = await client.signup(user);
       dispatch(setCurrentUser(currentUser));
       router.push("/profile");
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (e: any) {
       setError(e.response?.data?.message || "Signup failed.");
     }
@@ -40,10 +40,15 @@ export default function Signup() {
         placeholder="password"
         onChange={(e) => setUser({ ...user, password: e.target.value })}
       />
-      <button onClick={signup} className="wd-signup-btn btn btn-primary mb-2 w-100">
+      <button
+        onClick={signup}
+        className="wd-signup-btn btn btn-primary mb-2 w-100"
+      >
         Sign up
       </button>
-      <Link href="/account/signin" className="wd-signin-link">Sign in</Link>
+      <Link href="/account/signin" className="wd-signin-link">
+        Sign in
+      </Link>
     </div>
   );
 }

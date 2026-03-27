@@ -13,9 +13,11 @@ export default function KambazLayout({ children }: { children: any }) {
       <Session>
         <div className="d-flex" id="wd-kambaz">
           <div>
-          <KambazNavigation />
+            <KambazNavigation />
           </div>
-          <div className="flex-fill ps-3 wd-main-content-offset">{children}</div>
+          <div className="flex-fill ps-3 wd-main-content-offset">
+            {children}
+          </div>
         </div>
       </Session>
     </Provider>

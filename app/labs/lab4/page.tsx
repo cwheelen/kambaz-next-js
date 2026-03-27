@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import PassingFunctions from "./PassingFunctions";
 import ClickEvent from "./ClickEvent";
 import PassingDataOnEvent from "./PassingDataOnEvent";
@@ -13,8 +13,6 @@ import Link from "next/link";
 import store from "./store";
 import { Provider } from "react-redux";
 
-
-
 export default function Lab4() {
   function sayHello() {
     alert("Hello");
@@ -23,7 +21,7 @@ export default function Lab4() {
     <Provider store={store}>
       <div id="wd-passing-functions">
         <h2>Lab 4</h2>
-        
+
         <PassingDataOnEvent />
         <ClickEvent />
         <PassingFunctions theFunction={sayHello} />
@@ -39,7 +37,7 @@ export default function Lab4() {
         <Link href="./lab4/react-context">React Context Examples</Link>
         <br />
         <Link href="./lab4/zustand">Zustand Examples</Link>
-
       </div>
     </Provider>
-);}
+  );
+}

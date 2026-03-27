@@ -25,7 +25,10 @@ export default function WorkingWithArraysAsynchronously() {
   };
 
   const postNewTodo = async () => {
-    const newTodo = await client.postNewTodo({ title: "New Posted Todo", completed: false, });
+    const newTodo = await client.postNewTodo({
+      title: "New Posted Todo",
+      completed: false,
+    });
     setTodos([...todos, newTodo]);
   };
 
@@ -37,11 +40,13 @@ export default function WorkingWithArraysAsynchronously() {
     } catch (error: any) {
       console.log(error);
       setErrorMessage(error.response.data.message);
-    }  };
+    }
+  };
 
   const editTodo = (todo: any) => {
-    const updatedTodos = todos.map(
-      (t) => t.id === todo.id ? { ...todo, editing: true } : t );
+    const updatedTodos = todos.map((t) =>
+      t.id === todo.id ? { ...todo, editing: true } : t,
+    );
     setTodos(updatedTodos);
   };
   const [errorMessage, setErrorMessage] = useState(null);
@@ -54,50 +59,83 @@ export default function WorkingWithArraysAsynchronously() {
     }
   };
 
-
-
-
-
-
-
   useEffect(() => {
     fetchTodos();
   }, []);
   return (
     <div id="wd-asynchronous-arrays">
       <h3>Working with Arrays Asynchronously</h3>
-      {errorMessage && (<div id="wd-todo-error-message" className="alert alert-danger mb-2 mt-2">{errorMessage}</div>)}
-
-      <h4>Todos 
-      <FaPlusCircle onClick={createNewTodo} className="text-success float-end fs-3" />
-      <FaPlusCircle onClick={postNewTodo}   className="text-primary float-end fs-3 me-3" id="wd-post-todo"   />
-     </h4>
+      {errorMessage && (
+        <div
+          id="wd-todo-error-message"
+          className="alert alert-danger mb-2 mt-2"
+        >
+          {errorMessage}
+        </div>
+      )}
+      <h4>
+        Todos
+        <FaPlusCircle
+          onClick={createNewTodo}
+          className="text-success float-end fs-3"
+        />
+        <FaPlusCircle
+          onClick={postNewTodo}
+          className="text-primary float-end fs-3 me-3"
+          id="wd-post-todo"
+        />
+      </h4>
       <ListGroup>
         {todos.map((todo) => (
           <ListGroupItem key={todo.id}>
-            <FaPencil onClick={() => editTodo(todo)} className="text-primary float-end me-2 mt-1" />
-            <input type="checkbox" defaultChecked={todo.completed} className="form-check-input me-2 float-start"
-              onChange={(e) => updateTodo({ ...todo, completed: e.target.checked }) } />
-              {!todo.editing ? ( todo.title ) : (
-                <FormControl className="w-50 float-start" defaultValue={todo.title}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") {
-                      updateTodo({ ...todo, editing: false });
-                    }
-                  }}
-                  onChange={(e) =>
-                    updateTodo({ ...todo, title: e.target.value })
+            <FaPencil
+              onClick={() => editTodo(todo)}
+              className="text-primary float-end me-2 mt-1"
+            />
+            <input
+              type="checkbox"
+              defaultChecked={todo.completed}
+              className="form-check-input me-2 float-start"
+              onChange={(e) =>
+                updateTodo({ ...todo, completed: e.target.checked })
+              }
+            />
+            {!todo.editing ? (
+              todo.title
+            ) : (
+              <FormControl
+                className="w-50 float-start"
+                defaultValue={todo.title}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    updateTodo({ ...todo, editing: false });
                   }
-                />
-              )}
+                }}
+                onChange={(e) => updateTodo({ ...todo, title: e.target.value })}
+              />
+            )}
 
-            <FaTrash onClick={() => removeTodo(todo)}
-                     className="text-danger float-end mt-1" id="wd-remove-todo"/>
-            <TiDelete onClick={() => deleteTodo(todo)} className="text-danger float-end me-2 fs-3" id="wd-delete-todo" />
-            <span style={{ textDecoration: todo.completed ? "line-through" : "none" }}>
-              {todo.title} </span>
+            <FaTrash
+              onClick={() => removeTodo(todo)}
+              className="text-danger float-end mt-1"
+              id="wd-remove-todo"
+            />
+            <TiDelete
+              onClick={() => deleteTodo(todo)}
+              className="text-danger float-end me-2 fs-3"
+              id="wd-delete-todo"
+            />
+            <span
+              style={{
+                textDecoration: todo.completed ? "line-through" : "none",
+              }}
+            >
+              {todo.title}{" "}
+            </span>
           </ListGroupItem>
         ))}
-      </ListGroup> <hr />
+      </ListGroup>{" "}
+      <hr />
     </div>
-);}
+  );
+}

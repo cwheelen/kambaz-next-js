@@ -17,7 +17,8 @@ export default function Lab5() {
         <a href={`${HTTP_SERVER}/lab5/welcome`} className="list-group-item">
           Welcome
         </a>
-      </div><hr />
+      </div>
+      <hr />
       <EnvironmentVariables />
       <PathParameters />
       <QueryParameters />

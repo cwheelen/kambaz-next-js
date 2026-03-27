@@ -6,18 +6,28 @@ import { FaPlus } from "react-icons/fa6";
 import GreenCheckmark from "./GreenCheckmark";
 import ModuleEditor from "./ModuleEditor";
 
-export default function ModulesControls(
-  { moduleName, setModuleName, addModule }:
-  { moduleName: string; setModuleName: (title: string) => void; addModule: () => void; }
-) {
+export default function ModulesControls({
+  moduleName,
+  setModuleName,
+  addModule,
+}: {
+  moduleName: string;
+  setModuleName: (title: string) => void;
+  addModule: () => void;
+}) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   return (
     <div id="wd-modules-controls" className="text-nowrap">
-      <Button variant="danger" size="lg" className="me-1 float-end"
-              id="wd-add-module-btn" onClick={handleShow}>
+      <Button
+        variant="danger"
+        size="lg"
+        className="me-1 float-end"
+        id="wd-add-module-btn"
+        onClick={handleShow}
+      >
         <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
         Module
       </Button>
@@ -45,11 +55,21 @@ export default function ModulesControls(
         </Dropdown.Menu>
       </Dropdown>
 
-      <Button variant="secondary" size="lg" className="me-2 float-end" id="wd-view-progress">
+      <Button
+        variant="secondary"
+        size="lg"
+        className="me-2 float-end"
+        id="wd-view-progress"
+      >
         View Progress
       </Button>
 
-      <Button variant="secondary" size="lg" className="me-2 float-end" id="wd-collapse-all">
+      <Button
+        variant="secondary"
+        size="lg"
+        className="me-2 float-end"
+        id="wd-collapse-all"
+      >
         Collapse All
       </Button>
 
@@ -59,7 +79,8 @@ export default function ModulesControls(
         dialogTitle="Add Module"
         moduleName={moduleName}
         setModuleName={setModuleName}
-        addModule={addModule} />
+        addModule={addModule}
+      />
     </div>
   );
 }

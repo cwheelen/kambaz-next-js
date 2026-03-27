@@ -9,8 +9,8 @@ export default function TemplateLiterals() {
   return (
     <div id="wd-template-literals">
       <h4>Template Literals</h4>
-      result1 = {result1}     <br />
-      result2 = {result2}     <br />
+      result1 = {result1} <br />
+      result2 = {result2} <br />
       greeting1 = {greeting1} <br />
       greeting2 = {greeting2} <hr />
     </div>

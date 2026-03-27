@@ -6,4 +6,5 @@ export default function JsonStringify() {
       squares = {JSON.stringify(squares)}
       <hr />
     </div>
-);}
+  );
+}

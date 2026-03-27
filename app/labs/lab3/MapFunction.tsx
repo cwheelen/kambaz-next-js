@@ -16,7 +16,8 @@ export default function MapFunction() {
         {todos.map((todo) => (
           <li>{todo}</li>
         ))}
-      </ol> <hr/>
+      </ol>{" "}
+      <hr />
     </div>
   );
 }
