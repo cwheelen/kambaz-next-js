@@ -29,7 +29,7 @@ export default function AssignmentEditor() {
         if (data) setAssignment(data);
       });
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [aid]);
 
   const handleSave = async () => {

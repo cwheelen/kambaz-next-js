@@ -1,4 +1,6 @@
 "use client";
+/* eslint-disable @next/next/no-img-element */
+/* eslint-disable jsx-a11y/alt-text */
 import { AiOutlineDashboard } from "react-icons/ai";
 import { IoCalendarOutline } from "react-icons/io5";
 import { LiaBookSolid, LiaCogSolid } from "react-icons/lia";
@@ -10,7 +12,7 @@ export default function KambazNavigation() {
   const pathname = usePathname();
   const links = [
     { label: "Dashboard", path: "/dashboard", icon: AiOutlineDashboard },
-    { label: "Courses", path: "/dashboard", icon: LiaBookSolid },
+    { label: "Courses", path: "/Courses", icon: LiaBookSolid },
     { label: "Calendar", path: "/Calendar", icon: IoCalendarOutline },
     { label: "Inbox", path: "/Inbox", icon: FaInbox },
     { label: "Labs", path: "/labs", icon: LiaCogSolid },
