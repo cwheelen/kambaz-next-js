@@ -67,6 +67,7 @@ export default function TOC() {
       </NavItem>
       <NavItem>
         <NavLink href="https://github.com/cwheelen">My GitHub</NavLink>
+        <NavLink href="https://github.com/cwheelen/kambaz-node-server-app.git">Node github</NavLink>
       </NavItem>
     </Nav>
   );
