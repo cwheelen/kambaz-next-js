@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Button, Dropdown } from "react-bootstrap";
 import dynamic from "next/dynamic";
-import "react-quill/dist/quill.snow.css";
+import "react-quill-new/dist/quill.snow.css";
 import * as client from "./client";
 
 const ReactQuill = dynamic(
