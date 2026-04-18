@@ -9,7 +9,7 @@ export default function CourseNavigation() {
   const links = [
     { label: "Home", path: `/courses/${cid}/home` },
     { label: "Modules", path: `/courses/${cid}/modules` },
-    { label: "Piazza", path: `/courses/${cid}/piazza` },
+    { label: "Pazza", path: `/courses/${cid}/pazza` },
     { label: "Zoom", path: `/courses/${cid}/zoom` },
     { label: "Assignments", path: `/courses/${cid}/assignments` },
     { label: "Quizzes", path: `/courses/${cid}/quizzes` },
